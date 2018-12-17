@@ -8,10 +8,10 @@ Author URI:     http://seedyrom.io
 License:        GPL2
 */
 
-global $TEMPLATE_CONFIG = array(
+$TEMPLATE_CONFIG = array(
 	'name' => 'Partner Page',
 	'path' => 'partner-page-template.php'
-)
+);
 
 /*
  * See: https://www.wpexplorer.com/wordpress-page-templates-plugin/
