@@ -1,21 +1,57 @@
 'use strict';
 
-var el = wp.element.createElement,
-    registerBlockType = wp.blocks.registerBlockType,
-    blockStyle = { backgroundColor: '#900', color: '#fff', padding: '20px' };
+window.onload = function() {
+    console.log(wp.editor);
 
-registerBlockType('discogs-partner-pages/discogs-partner-feed', {
-    title: 'Hello World (Step 1)',
+    var el = wp.element.createElement,
+        registerBlockType = wp.blocks.registerBlockType,
+        blockStyle = {
+            backgroundColor: '#900',
+            color: '#fff',
+            padding: '20px'
+        },
+        RichText = wp.editor.RichText;
 
-    icon: 'universal-access-alt',
+    registerBlockType('discogs-partner-pages/discogs-partner-feed', {
+        title: 'Partner News Feeds',
+        icon: 'editor-kitchensink',
+        category: 'embed',
 
-    category: 'layout',
+        attributes: {
+            content: {
+                type: 'string',
+                source: 'html',
+                selector: 'p',
+            }
+        },
 
-    edit: function() {
-        return el( 'p', { style: blockStyle }, 'Hello editor.' );
-    },
+        edit: function (props) {
+            var content = props.attributes.content;
 
-    save: function() {
-        return el( 'p', { style: blockStyle }, 'Hello saved content.' );
-    },
-});
+            function onChangeContent(newContent) {
+                props.setAttributes({
+                    content: newContent
+                });
+            }
+
+            return el(
+                RichText, {
+                    tagName: 'p',
+                    className: props.className,
+                    onChange: onChangeContent,
+                    value: content,
+                }
+            );
+        },
+
+        save: function (props) {
+            var content = props.attributes.content;
+
+            return el(RichText.Content, {
+                tagName: 'p',
+                className: props.className,
+                value: content
+            });
+        },
+    });
+}
