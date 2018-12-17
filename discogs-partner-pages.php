@@ -8,13 +8,14 @@ Author URI:     http://seedyrom.io
 License:        GPL2
 */
 
+global $TEMPLATE_CONFIG = array(
+	'name' => 'Partner Page',
+	'path' => 'partner-page-template.php'
+)
+
 /*
  * See: https://www.wpexplorer.com/wordpress-page-templates-plugin/
  */
-
-global $template_name = 'Partner Page';
-global $template_path = 'partner-page-template.php';
-
 class PartnerPageTemplate
 {
     /**
@@ -68,7 +69,7 @@ class PartnerPageTemplate
         ));
         // Add your templates to this array.
         $this->templates = array(
-            $GLOBALS['template_path'] => $GLOBALS['template_name']
+            $GLOBALS['TEMPLATE_CONFIG']['path'] => $GLOBALS['TEMPLATE_CONFIG']['name']
         );
     }
     /**
