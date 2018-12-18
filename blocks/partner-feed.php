@@ -3,7 +3,7 @@ function partner_feed_block() {
     wp_register_script(
         'discogs-partner-feed',
         plugins_url('../scripts/partner-feed.js', __FILE__),
-        array( 'wp-blocks', 'wp-element' )
+        array('wp-blocks', 'wp-element', 'wp-editor')
     );
 
     register_block_type('discogs-partner-pages/discogs-partner-feed', array(

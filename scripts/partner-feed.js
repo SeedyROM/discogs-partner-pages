@@ -1,8 +1,6 @@
 'use strict';
 
 window.onload = function() {
-    console.log(wp.editor);
-
     var el = wp.element.createElement,
         registerBlockType = wp.blocks.registerBlockType,
         blockStyle = {
@@ -11,7 +9,7 @@ window.onload = function() {
             padding: '20px'
         },
         RichText = wp.editor.RichText;
-
+        
     registerBlockType('discogs-partner-pages/discogs-partner-feed', {
         title: 'Partner News Feeds',
         icon: 'editor-kitchensink',
