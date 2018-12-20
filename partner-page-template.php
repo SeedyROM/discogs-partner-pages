@@ -1,4 +1,4 @@
-<?php include('sections/header.php'); ?>
+<?php get_header(); include('sections/header.php'); ?>
 
 <main id="main" class="site-main" role="main">
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>

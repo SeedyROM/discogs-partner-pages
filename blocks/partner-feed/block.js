@@ -8,7 +8,16 @@
   var InspectorControls = wp.editor.InspectorControls
   var TextControl = components.TextControl
 
-  
+  function getFeedData(url, callback) {
+    
+    var req = new XMLHttpRequest();
+    req.addEventListener('load', function() {
+      console.log('Load!');
+      callback(this);
+    });
+    req.open('GET', url);
+    req.send();
+  }
 
   registerBlockType('discogs-partner-pages/partner-feed-block', {
     title: i18n.__('Partner Feed'),
@@ -16,18 +25,30 @@
     icon: 'businessman',
     category: 'embed',
 
-    edit: function() {
-      return el('p', {}, 'Hello Editor!');
+    edit: function(props) {
+      function onChange(event) {
+        props.setAttributes({ feedSource: event.target.value });
+      }
+
+      return el('div', { className: 'partner-feed-editor' }, 
+        el('h4', {}, 'Partner Feed Source:'),
+        el('input', {
+          value: props.attributes.feedSource,
+          onChange: onChange,
+        })
+      );
     },
-    save: function() {
-      return el('p', {}, 'Hello Saved!!!');
+
+    save: function(props) {
+      getFeedData(props.attributes.feedSource, function(request) {
+        console.log(request.responseText);
+      });
+      return el('p', {}, props.attributes.feedSource);
     },
 
     attributes: {
-      title: {
-        type: 'array',
-        source: 'children',
-        selector: 'h3'
+      feedSource: {
+        type: 'string',
       },
     },
   });
