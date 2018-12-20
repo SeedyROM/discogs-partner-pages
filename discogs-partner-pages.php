@@ -13,8 +13,6 @@ $TEMPLATE_CONFIG = array(
 	'path' => 'partner-page-template.php'
 );
 
-include('blocks/partner-feed.php');
-
 /*
  * See: https://www.wpexplorer.com/wordpress-page-templates-plugin/
  */
