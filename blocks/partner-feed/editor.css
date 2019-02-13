@@ -17,9 +17,11 @@
     outline: none;
     color: #333;
     width: 60%;
+    padding: 0.66rem;
 }
 
 .partner-feed-editor h4 {
     color: #333;
     margin: 0;
+    margin-bottom: 0.5rem;
 }

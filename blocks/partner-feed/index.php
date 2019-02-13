@@ -1,7 +1,7 @@
 <?php
-function discogs_partner_feed_block() {
+function discogs_partner_feed_editor_enqueue() {
     wp_register_script(
-        'discogs-partner-feed-script',
+        'discogs-partner-feed-editor-script',
         plugins_url('block.js', __FILE__),
         array('wp-blocks', 'wp-components', 'wp-element', 'wp-i18n', 'wp-editor'),
         filemtime(plugin_dir_path(__FILE__) . 'block.js'),
@@ -14,20 +14,35 @@ function discogs_partner_feed_block() {
 		array('wp-edit-blocks'),
 		filemtime(plugin_dir_path(__FILE__) . 'editor.css')
     );
-    
-    wp_register_style(
-		'discogs-partner-feed-style',
-		plugins_url('style.css', __FILE__),
-		array('wp-edit-blocks'),
-		filemtime(plugin_dir_path(__FILE__) . 'style.css')
-	);
+}
+add_action('enqueue_block_editor_assets', 'discogs_partner_feed_editor_enqueue');
 
+function discogs_partner_feed_enqueue() {
+    if(!is_admin()) {
+        wp_register_style(
+            'discogs-partner-feed-style',
+            plugins_url('style.css', __FILE__),
+            array('wp-edit-blocks'),
+            filemtime(plugin_dir_path(__FILE__) . 'style.css')
+        );
+
+        wp_register_script(
+            'discogs-partner-feed-script',
+            plugins_url('feed.js', __FILE__),
+            array(),
+            filemtime(plugin_dir_path(__FILE__) . 'feed.js'),
+            true
+        );
+    }
+}
+add_action('enqueue_block_assets', 'discogs_partner_feed_enqueue');
+
+function discogs_partner_feed_block() {
     register_block_type('discogs-partner-feed/block', array(
-        'editor_script' => 'discogs-partner-feed-script',
+        'editor_script' => 'discogs-partner-feed-editor-script',
         'editor_style' => 'discogs-partner-feed-editor-style',
-        'style' => 'discogs-partner-feed-style'
+        'style' => 'discogs-partner-feed-style',
     ));
 }
-
 add_action('init', 'discogs_partner_feed_block');
 ?>
