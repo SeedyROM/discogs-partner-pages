@@ -29,7 +29,7 @@
     },
 
     save: function(props) {
-      return el('div', {className: 'partner-feed', dataUri: props.attributes.feedSource}, el('div', {}, 'Loading....'));
+      return el('div', {className: 'partner-feed', 'data-uri': props.attributes.feedSource});
     },
 
     attributes: {

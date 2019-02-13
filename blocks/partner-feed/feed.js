@@ -1,5 +1,4 @@
 'use strict';
-console.clear();
 
 // Usage
 // <div class="partner-feed" data-uri="http://blog.discogs.com/en/tag/vinyl-me-please/feed/">
@@ -17,6 +16,9 @@ console.clear();
   // Globals
   var posts = null;
   var $partnerFeed =  $('.partner-feed');
+
+  // Display something while it's loading...
+  $partnerFeed.html($('<div class="loading">Loading...</div>'))
   
   // The markup for our feed posts.
   function postComponent(state) {
